@@ -296,7 +296,7 @@ MonoBehaviour:
   speed: 5
   acceleration: 5
   deceleration: 10
-  jumpHeight: 2
+  jumpHeight: 0.5
   gravity: -9.8
   shouldFaceMoveDir: 1
   animator: {fileID: 948138165}

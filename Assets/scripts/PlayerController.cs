@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed = 0f;
     private float targetMaxSpeed; 
 
-    //private bool isSprinting = false;
+    //private bool sprintJump = false;
 
     private CharacterController controller;
     private Vector2 moveInput;
@@ -45,12 +45,10 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        //animator.SetTrigger("jumped");
-
         Debug.Log($"Jumping {context.performed} - Is Grounded: {controller.isGrounded}");
         if (context.performed && controller.isGrounded)
         {
-            //animator.applyRootMotion = false;
+            //jumpInput = context.ReadValue<Vector2>();
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetTrigger("jumped");
             
@@ -74,11 +72,14 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput.magnitude > 0.1f)
         {
+            //sprintJump = true;
             //targetMaxSpeed = isSprinting ? 10f : speed;
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetMaxSpeed, acceleration * Time.deltaTime);
+            
         }
         else
         {
+            //sprintJump = false;
             currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
         }
 
@@ -95,6 +96,13 @@ public class PlayerController : MonoBehaviour
         //deals with jumping
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        /*
+        if (sprintJump == true)
+        {
+            controller.Move(moveDir * currentSpeed * Time.deltaTime);
+        }
+        */
 
         //move animations
         animator.SetFloat("speed", currentSpeed / targetMaxSpeed);

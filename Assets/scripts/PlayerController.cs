@@ -15,10 +15,9 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed = 0f;
     private float targetMaxSpeed; 
 
-    //private bool sprintJump = false;
-
     private CharacterController controller;
     private Vector2 moveInput;
+    private bool isSprinting;
     private Vector3 velocity;
 
     public Animator animator;
@@ -32,23 +31,27 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        Debug.Log($"Move Input: {moveInput}");
+        //Debug.Log($"Move Input: {moveInput}");
 
     }
 
-    /*
     public void Sprint(InputAction.CallbackContext context)
     {
-        isSprinting = context.ReadValueAsButton();
+        if(context.performed)
+        {
+            isSprinting = true;
+        }
+        else{
+            isSprinting = false;
+        }
+        Debug.Log($"Sprint Input: {isSprinting}");
     }
-    */
 
     public void Jump(InputAction.CallbackContext context)
     {
-        Debug.Log($"Jumping {context.performed} - Is Grounded: {controller.isGrounded}");
+        //Debug.Log($"Jumping {context.performed} - Is Grounded: {controller.isGrounded}");
         if (context.performed && controller.isGrounded)
         {
-            //jumpInput = context.ReadValue<Vector2>();
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             animator.SetTrigger("jumped");
             
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
 
@@ -72,18 +76,19 @@ public class PlayerController : MonoBehaviour
 
         if (moveInput.magnitude > 0.1f)
         {
-            //sprintJump = true;
-            //targetMaxSpeed = isSprinting ? 10f : speed;
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetMaxSpeed, acceleration * Time.deltaTime);
             
         }
         else
         {
-            //sprintJump = false;
             currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
         }
 
-        //apply movement
+        if (isSprinting == true)
+        {
+            currentSpeed += 3f;
+        }
+
         controller.Move(moveDir * currentSpeed * Time.deltaTime);
 
         //rotate toward movement direction
@@ -97,16 +102,11 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        /*
-        if (sprintJump == true)
-        {
-            controller.Move(moveDir * currentSpeed * Time.deltaTime);
-        }
-        */
 
         //move animations
         animator.SetFloat("speed", currentSpeed / targetMaxSpeed);
-
+        
+        Debug.Log(currentSpeed);
         
     }
 }

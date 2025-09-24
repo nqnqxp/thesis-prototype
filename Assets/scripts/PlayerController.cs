@@ -37,14 +37,20 @@ public class PlayerController : MonoBehaviour
 
     public void Sprint(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        //Debug.Log($"Sprinting {context.performed}");
+        if (context.started)
         {
+            Debug.Log("Sprint started");
+            animator.SetBool("isSprinting", true);
             isSprinting = true;
         }
-        else{
+        else if (context.canceled)
+        {
+            Debug.Log("Sprint canceled");
+            animator.SetBool("isSprinting", false);
             isSprinting = false;
         }
-        Debug.Log($"Sprint Input: {isSprinting}");
+        //Debug.Log($"Sprint Input: {isSprinting}");
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -84,10 +90,7 @@ public class PlayerController : MonoBehaviour
             currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.deltaTime);
         }
 
-        if (isSprinting == true)
-        {
-            currentSpeed += 3f;
-        }
+        targetMaxSpeed = isSprinting ? speed + 4f : speed;
 
         controller.Move(moveDir * currentSpeed * Time.deltaTime);
 

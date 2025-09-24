@@ -272,7 +272,19 @@ MonoBehaviour:
     m_ActionId: 1d917543-e2f6-4435-8794-1f3e92dc7a80
     m_ActionName: CameraControls/GamepadZoom
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 209165675}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 98e0504b-bc2f-4a79-a6fb-d6737003fa7b
     m_ActionName: 'Gameplay/Sprint[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0

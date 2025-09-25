@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         forward.y = 0;
         right.y = 0;
-
+        
         forward.Normalize();
         right.Normalize();
 

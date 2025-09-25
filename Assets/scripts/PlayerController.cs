@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
     private float targetMaxSpeed; 
 
     private CharacterController controller;
-    private Vector2 moveInput;
-    private bool isSprinting;
+    public Vector2 moveInput;
+    public bool isSprinting;
     private Vector3 velocity;
 
     public Animator animator;
@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         //Debug.Log($"Move Input: {moveInput}");
 
+    }
+
+    public bool ShouldJump()
+    {
+        return controller.isGrounded/*&& velocity.y > 0f*/;
     }
 
     public void Sprint(InputAction.CallbackContext context)

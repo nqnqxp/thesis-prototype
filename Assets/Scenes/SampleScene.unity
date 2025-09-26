@@ -131,8 +131,9 @@ GameObject:
   - component: {fileID: 209165670}
   - component: {fileID: 209165669}
   - component: {fileID: 209165676}
-  - component: {fileID: 209165675}
   - component: {fileID: 209165674}
+  - component: {fileID: 209165678}
+  - component: {fileID: 209165677}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 209165675}
+      - m_Target: {fileID: 209165678}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
@@ -249,7 +250,7 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 209165675}
+      - m_Target: {fileID: 209165678}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
@@ -273,7 +274,7 @@ MonoBehaviour:
     m_ActionName: CameraControls/GamepadZoom
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 209165675}
+      - m_Target: {fileID: 209165678}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Sprint
         m_Mode: 0
@@ -292,26 +293,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &209165675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209165668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4cbc7aa418704eca917876e683ca357, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 925895129}
-  speed: 5
-  acceleration: 5
-  deceleration: 10
-  jumpHeight: 2
-  gravity: -9.8
-  shouldFaceMoveDir: 1
-  animator: {fileID: 948138165}
 --- !u!143 &209165676
 CharacterController:
   m_ObjectHideFlags: 0
@@ -337,6 +318,45 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -0.09, y: 0.26, z: -0.29}
+--- !u!114 &209165677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209165668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5642b05b9efce5a46b1c895a6cf3d74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 209165678}
+--- !u!114 &209165678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209165668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411ee25cc9d74454ebc574cf183f91b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 925895129}
+  speed: 5
+  acceleration: 5
+  deceleration: 15
+  jumpHeight: 2
+  gravity: -9.8
+  shouldFaceMoveDir: 1
+  currentSpeed: 0
+  controller: {fileID: 209165676}
+  moveInput: {x: 0, y: 0}
+  isSprinting: 0
+  velocity: {x: 0, y: 0, z: 0}
+  jumpInput: 0
+  animator: {fileID: 948138165}
 --- !u!1 &240188169
 GameObject:
   m_ObjectHideFlags: 0

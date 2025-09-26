@@ -233,9 +233,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
-        m_MethodName: OnMove
+      - m_Target: {fileID: 209165675}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Move
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -249,9 +249,9 @@ MonoBehaviour:
     m_ActionName: 'Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
-        m_MethodName: OnJump
+      - m_Target: {fileID: 209165675}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -273,9 +273,9 @@ MonoBehaviour:
     m_ActionName: CameraControls/GamepadZoom
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerStateMachine, Assembly-CSharp
-        m_MethodName: OnSprint
+      - m_Target: {fileID: 209165675}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Sprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -311,8 +311,6 @@ MonoBehaviour:
   jumpHeight: 2
   gravity: -9.8
   shouldFaceMoveDir: 1
-  moveInput: {x: 0, y: 0}
-  isSprinting: 0
   animator: {fileID: 948138165}
 --- !u!143 &209165676
 CharacterController:
@@ -1177,7 +1175,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149016753733}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: aa3f9e0f8ceca49fd966759a7c749208, type: 3}
   m_Controller: {fileID: 9100000, guid: 7e9c17a63c5f64ad29f9ff1264ba3a5c, type: 2}
   m_CullingMode: 0

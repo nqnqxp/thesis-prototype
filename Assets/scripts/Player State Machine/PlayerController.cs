@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public class PlayerController : MonoBehaviour
@@ -23,6 +24,19 @@ public class PlayerController : MonoBehaviour
     public bool jumpInput;
     public Vector3 moveDirAtJump;
 
+    /* Combat State Variables
+    public bool isAiming;
+    public Vector2 mouseDeltaInput;
+    public float leftChargeInput;
+    public float rightChargeInput;
+    public bool leftFireInput;
+    public bool rightFireInput;
+     
+    // Gun Variables
+    public float leftGunCharge = 0f;  // Charged by Forward
+    public float rightGunCharge = 0f; // Charged by Backward
+    */
+
     public Animator animator;
 
     private PlayerStateMachine stateMachine;
@@ -43,6 +57,7 @@ public class PlayerController : MonoBehaviour
         targetMaxSpeed = speed;
     }
 
+    //MOVEMENT (MOVE SPRINT JUMP)
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -70,4 +85,65 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*COMBAT
+    
+    public void Aim(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isAiming = true;
+        }
+        else if (context.canceled)
+        {
+            isAiming = false;
+        }
+    }
+
+    public void Look(InputAction.CallbackContext context)
+    {
+        mouseDeltaInput = context.ReadValue<Vector2>();
+    }
+
+    public void leftCharge(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            leftChargeInput = Mathf.Min(0.0f + 0.2f * Time.deltaTime, 1.0f);
+        }
+        else if (context.canceled)
+        {
+            leftChargeInput = 0f;
+        }
+
+    }
+
+    public void rightCharge(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            rightChargeInput = Mathf.Min(0.0f + 0.2f * Time.deltaTime, 1.0f);
+        }
+        else if (context.canceled)
+        {
+            rightChargeInput = 0f;
+        }
+
+    }
+
+    public void LeftFire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            leftFireInput = true;
+        }
+    }
+
+    public void RightFire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            rightFireInput = true;
+        }
+    }
+    */
 }

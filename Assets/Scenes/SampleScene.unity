@@ -289,11 +289,35 @@ MonoBehaviour:
     m_ActionId: 98e0504b-bc2f-4a79-a6fb-d6737003fa7b
     m_ActionName: 'Gameplay/Sprint[/Keyboard/shift]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 209165678}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: LeftFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7a29a5a0-c831-4d6b-aca9-f17a7dd7333b
     m_ActionName: 'Gameplay/ShootL[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 209165678}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: RightFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f45b001d-8406-4c63-8e33-9ed7041e8d31
     m_ActionName: 'Gameplay/ShootR[/Mouse/rightButton]'
   - m_PersistentCalls:
@@ -405,6 +429,8 @@ MonoBehaviour:
   isAimingLeft: 0
   isAimingRight: 0
   isAimingGen: 0
+  leftFireInput: 0
+  rightFireInput: 0
   animator: {fileID: 948138165}
 --- !u!1 &240188169
 GameObject:

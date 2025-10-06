@@ -28,7 +28,11 @@ public class PlayerJumpingState : PlayerState
         if (playerController.isAimingLeft || playerController.isAimingRight)
         {
             Debug.Log("Jumping and Aiming");
-            //return;
+            if (playerController.leftFireInput || playerController.rightFireInput)
+            {
+                Debug.Log("Jumping and shooting");
+                //return;
+            }
         }
 
         if (playerController.controller.isGrounded && playerController.velocity.y < 0)

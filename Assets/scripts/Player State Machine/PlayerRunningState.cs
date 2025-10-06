@@ -29,7 +29,10 @@ public class PlayerRunningState : PlayerState
         if (playerController.isAimingLeft || playerController.isAimingRight)
         {
             Debug.Log("Running and Aiming");
-            //return;
+            if (playerController.leftFireInput || playerController.rightFireInput)
+            {
+                Debug.Log("Running and shooting");
+            }
         }
 
 

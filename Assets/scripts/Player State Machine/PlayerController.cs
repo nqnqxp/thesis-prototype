@@ -37,13 +37,9 @@ public class PlayerController : MonoBehaviour
     public bool isAimingLeft;
     public bool isAimingRight;
     public bool isAimingGen;
-    /*
+    
     public bool leftFireInput;
     public bool rightFireInput;
-     
-    // Gun controller
-    public DualGunController dualGunController;
-    */
 
     public Animator animator;
 
@@ -137,12 +133,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
+    
     public void LeftFire(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             leftFireInput = true;
+        }
+        else if (context.canceled)
+        {
+            leftFireInput = false;
         }
     }
 
@@ -152,12 +152,18 @@ public class PlayerController : MonoBehaviour
         {
             rightFireInput = true;
         }
+        else if (context.canceled)
+        {
+            rightFireInput = false;
+        }
     }
 
+    /*
     void LateUpdate()
     {
         leftFireInput = false;
         rightFireInput = false;
     }
     */
+    
 }

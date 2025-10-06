@@ -22,7 +22,10 @@ public class PlayerIdleState : PlayerState
         if (playerController.isAimingLeft || playerController.isAimingRight)
         {
             Debug.Log("Just aiming");
-            //return;
+            if (playerController.leftFireInput || playerController.rightFireInput)
+            {
+                Debug.Log("Just shooting");
+            }
         }
 
         if (playerController.moveInput.magnitude > 0.1f)

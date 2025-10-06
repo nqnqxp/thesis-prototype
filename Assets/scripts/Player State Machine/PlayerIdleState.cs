@@ -18,6 +18,13 @@ public class PlayerIdleState : PlayerState
 
     public override void UpdateState()
     {
+
+        if (playerController.isAimingLeft || playerController.isAimingRight)
+        {
+            Debug.Log("Just aiming");
+            //return;
+        }
+
         if (playerController.moveInput.magnitude > 0.1f)
         {
             stateMachine.ChangeState(new PlayerRunningState(stateMachine));

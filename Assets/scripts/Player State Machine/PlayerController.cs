@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.Rendering.DebugUI;
@@ -5,7 +6,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public Transform cameraTransform;
+    [SerializeField] public Transform tpcCameraTransform;
+    [SerializeField] public Transform aimCameraTransform;
     [SerializeField] public float speed = 5f;
     [SerializeField] public float acceleration = 5f;
     [SerializeField] public float deceleration = 15f;
@@ -24,17 +26,23 @@ public class PlayerController : MonoBehaviour
     public bool jumpInput;
     public Vector3 moveDirAtJump;
 
-    /* Combat State Variables
-    public bool isAiming;
-    public Vector2 mouseDeltaInput;
-    public float leftChargeInput;
-    public float rightChargeInput;
+
+    public Vector3 forward;
+    public Vector3 right;
+
+    [SerializeField] private CinemachineCamera tpcCam;
+    [SerializeField] private CinemachineCamera aimCam;
+
+    // Combat State Variables
+    public bool isAimingLeft;
+    public bool isAimingRight;
+    public bool isAimingGen;
+    /*
     public bool leftFireInput;
     public bool rightFireInput;
      
-    // Gun Variables
-    public float leftGunCharge = 0f;  // Charged by Forward
-    public float rightGunCharge = 0f; // Charged by Backward
+    // Gun controller
+    public DualGunController dualGunController;
     */
 
     public Animator animator;
@@ -45,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
 
         controller = GetComponent<CharacterController>();
+        //dualGunController = GetComponentInChildren<DualGunController>();
 
         stateMachine = GetComponent<PlayerStateMachine>();
         if (stateMachine == null)
@@ -55,6 +64,9 @@ public class PlayerController : MonoBehaviour
         stateMachine.playerController = this;
 
         targetMaxSpeed = speed;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     //MOVEMENT (MOVE SPRINT JUMP)
@@ -85,54 +97,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*COMBAT
+    //COMBAT
     
-    public void Aim(InputAction.CallbackContext context)
+    public void AimLeft(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            isAiming = true;
+            isAimingLeft = true;
+            isAimingGen = true;
+            aimCam.gameObject.SetActive(true);
+            tpcCam.gameObject.SetActive(false);
         }
         else if (context.canceled)
         {
-            isAiming = false;
+            isAimingLeft = false;
+            isAimingGen = false;
+            aimCam.gameObject.SetActive(false);
+            tpcCam.gameObject.SetActive(true);
         }
     }
 
-    public void Look(InputAction.CallbackContext context)
-    {
-        mouseDeltaInput = context.ReadValue<Vector2>();
-    }
+    
 
-    public void leftCharge(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            leftChargeInput = Mathf.Min(0.0f + 0.2f * Time.deltaTime, 1.0f);
-        }
-        else if (context.canceled)
-        {
-            leftChargeInput = 0f;
-        }
-
-    }
-
-    public void rightCharge(InputAction.CallbackContext context)
+    public void AimRight(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            rightChargeInput = Mathf.Min(0.0f + 0.2f * Time.deltaTime, 1.0f);
+            isAimingRight = true;
+            isAimingGen = true;
+            aimCam.gameObject.SetActive(true);
+            tpcCam.gameObject.SetActive(false);
         }
         else if (context.canceled)
         {
-            rightChargeInput = 0f;
+            isAimingRight = false;
+            isAimingGen = false;
+            aimCam.gameObject.SetActive(false);
+            tpcCam.gameObject.SetActive(false);
         }
-
     }
 
+    /*
     public void LeftFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
             leftFireInput = true;
         }
@@ -140,10 +148,16 @@ public class PlayerController : MonoBehaviour
 
     public void RightFire(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.started)
         {
             rightFireInput = true;
         }
+    }
+
+    void LateUpdate()
+    {
+        leftFireInput = false;
+        rightFireInput = false;
     }
     */
 }

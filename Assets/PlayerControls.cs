@@ -117,6 +117,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootL"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a29a5a0-c831-4d6b-aca9-f17a7dd7333b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShootR"",
+                    ""type"": ""Button"",
+                    ""id"": ""f45b001d-8406-4c63-8e33-9ed7041e8d31"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AimL"",
+                    ""type"": ""Button"",
+                    ""id"": ""51fe0c9f-a238-4e55-ad58-75770ceaf265"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AimR"",
+                    ""type"": ""Button"",
+                    ""id"": ""683590a1-4460-4c95-8b6f-8038bb98a7ba"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -222,11 +258,99 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8cabcd3c-b676-4fe8-be2d-bfbd90f059e2"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""835f4b2a-0c45-4b38-9ff0-8fd310700f8b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6ff8752-ab0a-4e53-b41d-6fc24d4525ed"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a564e1d-8098-4c1b-a8b0-8f49c1d652fc"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c7ef5f2-ab3e-4149-9709-ba8d5fea4e23"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0928da5-01ca-4d6c-aa6c-46fb57f19e4f"",
+                    ""path"": ""<Mouse>/backButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bb1dcfd-3d20-43ea-b101-f5e9aeea3463"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimL"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f2b03f8-f50c-4824-bca5-4a9d0b5d8d9c"",
+                    ""path"": ""<Mouse>/forwardButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56776c96-b6f4-422d-9ffc-bfeaa48b6e81"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -310,6 +434,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
+        m_Gameplay_ShootL = m_Gameplay.FindAction("ShootL", throwIfNotFound: true);
+        m_Gameplay_ShootR = m_Gameplay.FindAction("ShootR", throwIfNotFound: true);
+        m_Gameplay_AimL = m_Gameplay.FindAction("AimL", throwIfNotFound: true);
+        m_Gameplay_AimR = m_Gameplay.FindAction("AimR", throwIfNotFound: true);
         // CameraControls
         m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
         m_CameraControls_MouseZoom = m_CameraControls.FindAction("MouseZoom", throwIfNotFound: true);
@@ -398,6 +526,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Sprint;
+    private readonly InputAction m_Gameplay_ShootL;
+    private readonly InputAction m_Gameplay_ShootR;
+    private readonly InputAction m_Gameplay_AimL;
+    private readonly InputAction m_Gameplay_AimR;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -421,6 +553,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ShootL".
+        /// </summary>
+        public InputAction @ShootL => m_Wrapper.m_Gameplay_ShootL;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ShootR".
+        /// </summary>
+        public InputAction @ShootR => m_Wrapper.m_Gameplay_ShootR;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AimL".
+        /// </summary>
+        public InputAction @AimL => m_Wrapper.m_Gameplay_AimL;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AimR".
+        /// </summary>
+        public InputAction @AimR => m_Wrapper.m_Gameplay_AimR;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -456,6 +604,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @ShootL.started += instance.OnShootL;
+            @ShootL.performed += instance.OnShootL;
+            @ShootL.canceled += instance.OnShootL;
+            @ShootR.started += instance.OnShootR;
+            @ShootR.performed += instance.OnShootR;
+            @ShootR.canceled += instance.OnShootR;
+            @AimL.started += instance.OnAimL;
+            @AimL.performed += instance.OnAimL;
+            @AimL.canceled += instance.OnAimL;
+            @AimR.started += instance.OnAimR;
+            @AimR.performed += instance.OnAimR;
+            @AimR.canceled += instance.OnAimR;
         }
 
         /// <summary>
@@ -476,6 +636,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @ShootL.started -= instance.OnShootL;
+            @ShootL.performed -= instance.OnShootL;
+            @ShootL.canceled -= instance.OnShootL;
+            @ShootR.started -= instance.OnShootR;
+            @ShootR.performed -= instance.OnShootR;
+            @ShootR.canceled -= instance.OnShootR;
+            @AimL.started -= instance.OnAimL;
+            @AimL.performed -= instance.OnAimL;
+            @AimL.canceled -= instance.OnAimL;
+            @AimR.started -= instance.OnAimR;
+            @AimR.performed -= instance.OnAimR;
+            @AimR.canceled -= instance.OnAimR;
         }
 
         /// <summary>
@@ -644,6 +816,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShootL" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShootL(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShootR" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShootR(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AimL" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAimL(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AimR" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAimR(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CameraControls" which allows adding and removing callbacks.

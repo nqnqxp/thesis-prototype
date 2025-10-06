@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,14 +26,21 @@ public class PlayerRunningState : PlayerState
             return;
         }
 
+        if (playerController.isAimingLeft || playerController.isAimingRight)
+        {
+            Debug.Log("Running and Aiming");
+            //return;
+        }
+
 
         if (playerController.jumpInput && playerController.controller.isGrounded)
         {
-            Vector3 jforward = playerController.cameraTransform.forward;
-            Vector3 jright = playerController.cameraTransform.right;
+            Vector3 jforward = playerController.tpcCameraTransform.forward;
+            Vector3 jright = playerController.tpcCameraTransform.right;
 
             jforward.y = 0;
             jright.y = 0;
+
 
             jforward.Normalize();
             jright.Normalize();
@@ -41,17 +49,43 @@ public class PlayerRunningState : PlayerState
 
             stateMachine.ChangeState(new PlayerJumpingState(stateMachine));
         }
+        if (playerController.jumpInput && playerController.controller.isGrounded && playerController.isAimingGen)
+        {
+            Vector3 j2forward = playerController.aimCameraTransform.forward;
+            Vector3 j2right = playerController.aimCameraTransform.right;
 
-        Vector3 forward = playerController.cameraTransform.forward;
-        Vector3 right = playerController.cameraTransform.right;
+            j2forward.y = 0;
+            j2right.y = 0;
 
-        forward.y = 0;
-        right.y = 0;
+            j2forward.Normalize();
+            j2right.Normalize();
 
-        forward.Normalize();
-        right.Normalize();
 
-        Vector3 moveDir = forward * playerController.moveInput.y + right * playerController.moveInput.x;
+            playerController.moveDirAtJump = (j2forward * playerController.moveInput.y + j2right * playerController.moveInput.x).normalized;
+
+            stateMachine.ChangeState(new PlayerJumpingState(stateMachine));
+        }
+
+        if (playerController.isAimingGen)
+        {
+
+            playerController.forward = playerController.aimCameraTransform.forward;
+            playerController.right = playerController.aimCameraTransform.right;
+
+        }
+        else
+        {
+            playerController.forward = playerController.tpcCameraTransform.forward;
+            playerController.right = playerController.tpcCameraTransform.right;
+        }
+
+            playerController.forward.y = 0;
+        playerController.right.y = 0;
+
+        playerController.forward.Normalize();
+        playerController.right.Normalize();
+
+        Vector3 moveDir = playerController.forward * playerController.moveInput.y + playerController.right * playerController.moveInput.x;
         moveDir.Normalize();
 
 

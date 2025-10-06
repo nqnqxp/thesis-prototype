@@ -25,6 +25,12 @@ public class PlayerJumpingState : PlayerState
         playerController.velocity.y += playerController.gravity * Time.deltaTime;
         playerController.controller.Move(moveVector * Time.deltaTime);
 
+        if (playerController.isAimingLeft || playerController.isAimingRight)
+        {
+            Debug.Log("Jumping and Aiming");
+            //return;
+        }
+
         if (playerController.controller.isGrounded && playerController.velocity.y < 0)
         {
             playerController.animator.SetBool("isGrounded", true);
@@ -39,6 +45,8 @@ public class PlayerJumpingState : PlayerState
                 stateMachine.ChangeState(new PlayerRunningState(stateMachine));
             }
         }
+
+
     }
 
     public override void ExitState()

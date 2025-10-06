@@ -25,14 +25,63 @@ public class PlayerJumpingState : PlayerState
         playerController.velocity.y += playerController.gravity * Time.deltaTime;
         playerController.controller.Move(moveVector * Time.deltaTime);
 
-        if (playerController.isAimingLeft || playerController.isAimingRight)
+        if (playerController.isAimingLeft)
         {
-            Debug.Log("Jumping and Aiming");
-            if (playerController.leftFireInput || playerController.rightFireInput)
+            if (!playerController.isAimingRight)
             {
-                Debug.Log("Jumping and shooting");
+                playerController.aimCam.gameObject.SetActive(true);
+                playerController.tpcCam.gameObject.SetActive(false);
+            }
+
+            if (playerController.leftFireInput)
+            {
+                Debug.Log("just shooting left");
+            }
+        }
+
+        if (playerController.isAimingRight)
+        {
+            if (!playerController.isAimingLeft)
+            {
+                playerController.aimCam.gameObject.SetActive(true);
+                playerController.tpcCam.gameObject.SetActive(false);
+            }
+
+            if (playerController.rightFireInput)
+            {
+                Debug.Log("just shooting right");
+            }
+        }
+
+        /*
+        if (playerController.isAimingLeft && playerController.isAimingRight)
+        {
+            playerController.aimCam.gameObject.SetActive(true);
+            playerController.tpcCam.gameObject.SetActive(false);
+
+            if (playerController.rightFireInput && !playerController.leftFireInput)
+            {
+                Debug.Log("Just shooting right");
+
+            }
+            if (playerController.leftFireInput && !playerController.rightFireInput)
+            {
+                Debug.Log("Just shooting left");
+
+            }
+
+            if (playerController.leftFireInput && playerController.rightFireInput)
+            {
+                Debug.Log("Just shooting both");
                 //return;
             }
+        }
+        */
+
+        if (!playerController.isAimingLeft && !playerController.isAimingRight)
+        {
+            playerController.aimCam.gameObject.SetActive(false);
+            playerController.tpcCam.gameObject.SetActive(true);
         }
 
         if (playerController.controller.isGrounded && playerController.velocity.y < 0)

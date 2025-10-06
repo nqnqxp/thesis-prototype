@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 forward;
     public Vector3 right;
 
-    [SerializeField] private CinemachineCamera tpcCam;
-    [SerializeField] private CinemachineCamera aimCam;
+    [SerializeField] public CinemachineCamera tpcCam;
+    [SerializeField] public CinemachineCamera aimCam;
 
     // Combat State Variables
     public bool isAimingLeft;
@@ -97,26 +97,31 @@ public class PlayerController : MonoBehaviour
     
     public void AimLeft(InputAction.CallbackContext context)
     {
+
         if (context.started)
         {
             isAimingLeft = true;
-            isAimingGen = true;
-            aimCam.gameObject.SetActive(true);
-            tpcCam.gameObject.SetActive(false);
         }
         else if (context.canceled)
         {
             isAimingLeft = false;
-            isAimingGen = false;
-            aimCam.gameObject.SetActive(false);
-            tpcCam.gameObject.SetActive(true);
         }
+        
     }
-
-    
 
     public void AimRight(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            isAimingRight = true;
+        }
+        else if (context.canceled)
+        {
+            isAimingRight = false;
+            
+        }
+
+        /*
         if (context.started)
         {
             isAimingRight = true;
@@ -127,10 +132,14 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             isAimingRight = false;
-            isAimingGen = false;
-            aimCam.gameObject.SetActive(false);
-            tpcCam.gameObject.SetActive(true);
+            if (!isAimingLeft)
+            {
+                isAimingGen = false;
+                aimCam.gameObject.SetActive(false);
+                tpcCam.gameObject.SetActive(true);
+            }
         }
+        */
     }
 
     
@@ -165,5 +174,5 @@ public class PlayerController : MonoBehaviour
         rightFireInput = false;
     }
     */
-    
+
 }

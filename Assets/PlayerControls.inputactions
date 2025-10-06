@@ -33,24 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ShootL",
-                    "type": "Button",
-                    "id": "7a29a5a0-c831-4d6b-aca9-f17a7dd7333b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ShootR",
-                    "type": "Button",
-                    "id": "f45b001d-8406-4c63-8e33-9ed7041e8d31",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AimL",
                     "type": "Button",
                     "id": "51fe0c9f-a238-4e55-ad58-75770ceaf265",
@@ -63,6 +45,24 @@
                     "name": "AimR",
                     "type": "Button",
                     "id": "683590a1-4460-4c95-8b6f-8038bb98a7ba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShootL",
+                    "type": "Button",
+                    "id": "7a29a5a0-c831-4d6b-aca9-f17a7dd7333b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShootR",
+                    "type": "Button",
+                    "id": "f45b001d-8406-4c63-8e33-9ed7041e8d31",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -227,7 +227,7 @@
                 {
                     "name": "",
                     "id": "c0928da5-01ca-4d6c-aa6c-46fb57f19e4f",
-                    "path": "<Mouse>/forwardButton",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -249,7 +249,7 @@
                 {
                     "name": "",
                     "id": "9f2b03f8-f50c-4824-bca5-4a9d0b5d8d9c",
-                    "path": "<Mouse>/backButton",
+                    "path": "<Mouse>/forwardButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

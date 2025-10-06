@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
             isAimingRight = false;
             isAimingGen = false;
             aimCam.gameObject.SetActive(false);
-            tpcCam.gameObject.SetActive(false);
+            tpcCam.gameObject.SetActive(true);
         }
     }
 

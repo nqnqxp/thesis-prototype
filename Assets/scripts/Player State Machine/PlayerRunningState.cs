@@ -2,10 +2,10 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// This class represents the Running state of the player.
 public class PlayerRunningState : PlayerState
 {
     private PlayerController playerController;
+    Transform cameraTransform;
 
     public PlayerRunningState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -31,8 +31,8 @@ public class PlayerRunningState : PlayerState
         {
             if (!playerController.isAimingRight)
             {
-                playerController.aimCam.gameObject.SetActive(true);
-                playerController.tpcCam.gameObject.SetActive(false);
+                playerController.aimCam.Priority = PlayerController.activePriority;
+                playerController.tpcCam.Priority = PlayerController.inactivePriority;
             }
 
             if (playerController.leftFireInput)
@@ -45,8 +45,8 @@ public class PlayerRunningState : PlayerState
         {
             if (!playerController.isAimingLeft)
             {
-                playerController.aimCam.gameObject.SetActive(true);
-                playerController.tpcCam.gameObject.SetActive(false);
+                playerController.aimCam.Priority = PlayerController.activePriority;
+                playerController.tpcCam.Priority = PlayerController.inactivePriority;
             }
 
             if (playerController.rightFireInput)
@@ -55,35 +55,11 @@ public class PlayerRunningState : PlayerState
             }
         }
 
-        /*
-        if (playerController.isAimingLeft && playerController.isAimingRight)
-        {
-            playerController.aimCam.gameObject.SetActive(true);
-            playerController.tpcCam.gameObject.SetActive(false);
-
-            if (playerController.rightFireInput && !playerController.leftFireInput)
-            {
-                Debug.Log("Just shooting right");
-
-            }
-            if (playerController.leftFireInput && !playerController.rightFireInput)
-            {
-                Debug.Log("Just shooting left");
-
-            }
-
-            if (playerController.leftFireInput && playerController.rightFireInput)
-            {
-                Debug.Log("Just shooting both");
-                //return;
-            }
-        }
-        */
 
         if (!playerController.isAimingLeft && !playerController.isAimingRight)
         {
-            playerController.aimCam.gameObject.SetActive(false);
-            playerController.tpcCam.gameObject.SetActive(true);
+            playerController.aimCam.Priority = PlayerController.inactivePriority;
+            playerController.tpcCam.Priority = PlayerController.activePriority;
         }
 
         if (playerController.jumpInput && playerController.controller.isGrounded)
@@ -121,18 +97,17 @@ public class PlayerRunningState : PlayerState
 
         if (playerController.isAimingGen)
         {
-
-            playerController.forward = playerController.aimCameraTransform.forward;
-            playerController.right = playerController.aimCameraTransform.right;
-
+            cameraTransform = playerController.aimCameraTransform;
         }
         else
         {
-            playerController.forward = playerController.tpcCameraTransform.forward;
-            playerController.right = playerController.tpcCameraTransform.right;
+            cameraTransform = playerController.tpcCameraTransform;
         }
 
-            playerController.forward.y = 0;
+        playerController.forward = cameraTransform.forward;
+        playerController.right = cameraTransform.right;
+
+        playerController.forward.y = 0;
         playerController.right.y = 0;
 
         playerController.forward.Normalize();
@@ -148,6 +123,24 @@ public class PlayerRunningState : PlayerState
         playerController.currentSpeed = currentSpeed;
 
         playerController.controller.Move(moveDir * currentSpeed * Time.deltaTime);
+
+        if (playerController.isAimingGen)
+        {
+            Vector3 aimDirection = playerController.aimCameraTransform.forward;
+            aimDirection.y = 0;
+            aimDirection.Normalize();
+
+            if (aimDirection.sqrMagnitude > 0.001f)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(aimDirection, Vector3.up);
+                playerController.transform.rotation = Quaternion.Slerp(playerController.transform.rotation, toRotation, 10f * Time.deltaTime);
+            }
+        }
+        else if (playerController.shouldFaceMoveDir && moveDir.sqrMagnitude > 0.001f)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            playerController.transform.rotation = Quaternion.Slerp(playerController.transform.rotation, toRotation, 10f * Time.deltaTime);
+        }
 
         if (playerController.shouldFaceMoveDir && moveDir.sqrMagnitude > 0.001f)
         {

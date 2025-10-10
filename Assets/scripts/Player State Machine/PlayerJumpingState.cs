@@ -29,8 +29,8 @@ public class PlayerJumpingState : PlayerState
         {
             if (!playerController.isAimingRight)
             {
-                playerController.aimCam.gameObject.SetActive(true);
-                playerController.tpcCam.gameObject.SetActive(false);
+                playerController.aimCam.Priority = PlayerController.activePriority;
+                playerController.tpcCam.Priority = PlayerController.inactivePriority;
             }
 
             if (playerController.leftFireInput)
@@ -43,8 +43,8 @@ public class PlayerJumpingState : PlayerState
         {
             if (!playerController.isAimingLeft)
             {
-                playerController.aimCam.gameObject.SetActive(true);
-                playerController.tpcCam.gameObject.SetActive(false);
+                playerController.aimCam.Priority = PlayerController.activePriority;
+                playerController.tpcCam.Priority = PlayerController.inactivePriority;
             }
 
             if (playerController.rightFireInput)
@@ -53,35 +53,11 @@ public class PlayerJumpingState : PlayerState
             }
         }
 
-        /*
-        if (playerController.isAimingLeft && playerController.isAimingRight)
-        {
-            playerController.aimCam.gameObject.SetActive(true);
-            playerController.tpcCam.gameObject.SetActive(false);
-
-            if (playerController.rightFireInput && !playerController.leftFireInput)
-            {
-                Debug.Log("Just shooting right");
-
-            }
-            if (playerController.leftFireInput && !playerController.rightFireInput)
-            {
-                Debug.Log("Just shooting left");
-
-            }
-
-            if (playerController.leftFireInput && playerController.rightFireInput)
-            {
-                Debug.Log("Just shooting both");
-                //return;
-            }
-        }
-        */
 
         if (!playerController.isAimingLeft && !playerController.isAimingRight)
         {
-            playerController.aimCam.gameObject.SetActive(false);
-            playerController.tpcCam.gameObject.SetActive(true);
+            playerController.aimCam.Priority = PlayerController.inactivePriority;
+            playerController.tpcCam.Priority = PlayerController.activePriority;
         }
 
         if (playerController.controller.isGrounded && playerController.velocity.y < 0)

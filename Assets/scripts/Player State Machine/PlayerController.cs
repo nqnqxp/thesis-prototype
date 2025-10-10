@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public CinemachineCamera tpcCam;
     [SerializeField] public CinemachineCamera aimCam;
 
+    public const int activePriority = 20;
+    public const int inactivePriority = 1;
+
     // Combat State Variables
     public bool isAimingLeft;
     public bool isAimingRight;
@@ -49,7 +52,6 @@ public class PlayerController : MonoBehaviour
     {
 
         controller = GetComponent<CharacterController>();
-        //dualGunController = GetComponentInChildren<DualGunController>();
 
         stateMachine = GetComponent<PlayerStateMachine>();
         if (stateMachine == null)
@@ -101,10 +103,16 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             isAimingLeft = true;
+            isAimingGen = true;
         }
         else if (context.canceled)
         {
             isAimingLeft = false;
+
+            if (!isAimingRight)
+            {
+                isAimingGen = false;
+            }
         }
         
     }
@@ -114,11 +122,17 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             isAimingRight = true;
+            isAimingGen = true;
         }
         else if (context.canceled)
         {
             isAimingRight = false;
-            
+
+            if (!isAimingLeft)
+            {
+                isAimingGen = false;
+            }
+
         }
 
         /*
@@ -167,12 +181,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
-    void LateUpdate()
+    
+    void Update()
     {
-        leftFireInput = false;
-        rightFireInput = false;
+        Debug.Log(isAimingGen);
     }
-    */
+    
 
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerJumpingState : PlayerState
 {
     private PlayerController playerController;
+    public float newOffsetX;
+    public float newDutch;
 
     public PlayerJumpingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -20,6 +22,10 @@ public class PlayerJumpingState : PlayerState
 
     public override void UpdateState()
     {
+        //always get current offset and dutch
+        Vector3 currentOffset = playerController.aimCamOffset.Offset;
+        float currentDutch = playerController.aimCam.Lens.Dutch;
+
         Vector3 moveVector = playerController.moveDirAtJump * playerController.currentSpeed;
         moveVector.y = playerController.velocity.y;
         playerController.velocity.y += playerController.gravity * Time.deltaTime;
@@ -31,6 +37,27 @@ public class PlayerJumpingState : PlayerState
             {
                 playerController.aimCam.Priority = PlayerController.activePriority;
                 playerController.tpcCam.Priority = PlayerController.inactivePriority;
+
+                if (Mathf.Abs(currentOffset.x - playerController.aimLCamOffset.x) < 0.001f)
+                {
+                    playerController.aimCamOffset.Offset = playerController.aimLCamOffset;
+                }
+                else
+                {
+                    newOffsetX = Mathf.Lerp(currentOffset.x, playerController.aimLCamOffset.x, Time.deltaTime * playerController.transitionSpeed);
+                }
+                playerController.aimCamOffset.Offset = new Vector3(newOffsetX, currentOffset.y, currentOffset.z);
+
+                if (Mathf.Abs(currentDutch - PlayerController.aimLCamDutch) < 0.001f)
+                {
+                    playerController.aimCam.Lens.Dutch = PlayerController.aimLCamDutch;
+                }
+                else
+                {
+                    newDutch = Mathf.Lerp(currentDutch, PlayerController.aimLCamDutch, Time.deltaTime * playerController.transitionSpeed);
+                }
+
+                playerController.aimCam.Lens.Dutch = newDutch;
             }
 
             if (playerController.leftFireInput)
@@ -45,12 +72,57 @@ public class PlayerJumpingState : PlayerState
             {
                 playerController.aimCam.Priority = PlayerController.activePriority;
                 playerController.tpcCam.Priority = PlayerController.inactivePriority;
+
+                if (Mathf.Abs(currentOffset.x - playerController.aimRCamOffset.x) < 0.001f)
+                {
+                    playerController.aimCamOffset.Offset = playerController.aimRCamOffset;
+                }
+                else
+                {
+                    newOffsetX = Mathf.Lerp(currentOffset.x, playerController.aimRCamOffset.x, Time.deltaTime * playerController.transitionSpeed);
+                }
+                playerController.aimCamOffset.Offset = new Vector3(newOffsetX, currentOffset.y, currentOffset.z);
+
+                if (Mathf.Abs(currentDutch - PlayerController.aimRCamDutch) < 0.001f)
+                {
+                    playerController.aimCam.Lens.Dutch = PlayerController.aimRCamDutch;
+                }
+                else
+                {
+                    newDutch = Mathf.Lerp(currentDutch, PlayerController.aimRCamDutch, Time.deltaTime * playerController.transitionSpeed);
+                }
+
+                playerController.aimCam.Lens.Dutch = newDutch;
             }
 
             if (playerController.rightFireInput)
             {
                 Debug.Log("just shooting right");
             }
+        }
+
+        if (playerController.isAimingBoth)
+        {
+            if (Mathf.Abs(currentOffset.x - playerController.aimBCamOffset.x) < 0.001f)
+            {
+                playerController.aimCamOffset.Offset = playerController.aimBCamOffset;
+            }
+            else
+            {
+                newOffsetX = Mathf.Lerp(currentOffset.x, playerController.aimBCamOffset.x, Time.deltaTime * playerController.transitionSpeed);
+            }
+            playerController.aimCamOffset.Offset = new Vector3(newOffsetX, currentOffset.y, currentOffset.z);
+
+            if (Mathf.Abs(currentDutch - PlayerController.aimBCamDutch) < 0.001f)
+            {
+                playerController.aimCam.Lens.Dutch = PlayerController.aimBCamDutch;
+            }
+            else
+            {
+                newDutch = Mathf.Lerp(currentDutch, PlayerController.aimBCamDutch, Time.deltaTime * playerController.transitionSpeed);
+            }
+
+            playerController.aimCam.Lens.Dutch = newDutch;
         }
 
 

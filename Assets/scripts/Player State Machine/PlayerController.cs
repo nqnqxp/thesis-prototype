@@ -33,13 +33,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public CinemachineCamera tpcCam;
     [SerializeField] public CinemachineCamera aimCam;
 
+    public CinemachineCameraOffset aimCamOffset;
+
     public const int activePriority = 20;
     public const int inactivePriority = 1;
+
+    public const float aimRCamDutch = -4.35f;
+    public const float aimLCamDutch = 4.35f;
+
+    public const float aimBCamDutch = 0f;
+    public Vector3 aimBCamOffset = new Vector3(0f, 0f, 0f);
+
+    public Vector3 aimRCamOffset = new Vector3(0.66f, 0f, 0f);
+    public Vector3 aimLCamOffset = new Vector3(-0.66f, 0f, 0f);
+
+    //for camera blending
+    public float transitionSpeed = 10f;
 
     // Combat State Variables
     public bool isAimingLeft;
     public bool isAimingRight;
     public bool isAimingGen;
+    public bool isAimingBoth;
     
     public bool leftFireInput;
     public bool rightFireInput;
@@ -65,6 +80,8 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        aimCam.GetComponent<CinemachineCameraOffset>();
     }
 
     //MOVEMENT (MOVE SPRINT JUMP)
@@ -104,10 +121,16 @@ public class PlayerController : MonoBehaviour
         {
             isAimingLeft = true;
             isAimingGen = true;
+
+            if (isAimingRight == true)
+            {
+                isAimingBoth = true;
+            }
         }
         else if (context.canceled)
         {
             isAimingLeft = false;
+            isAimingBoth = false;
 
             if (!isAimingRight)
             {
@@ -123,10 +146,15 @@ public class PlayerController : MonoBehaviour
         {
             isAimingRight = true;
             isAimingGen = true;
+            if (isAimingLeft == true)
+            {
+                isAimingBoth = true;
+            }
         }
         else if (context.canceled)
         {
             isAimingRight = false;
+            isAimingBoth = false;
 
             if (!isAimingLeft)
             {

@@ -216,12 +216,6 @@ public class PlayerController : MonoBehaviour
             rightFireInput = false;
         }
     }
-
-    
-    void Update()
-    {
-        Debug.Log(isAimingGen);
-    }
     
 
 }

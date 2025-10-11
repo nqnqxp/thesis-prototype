@@ -1,6 +1,5 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 public class PlayerIdleState : PlayerState
 {
@@ -17,6 +16,8 @@ public class PlayerIdleState : PlayerState
     {
         Debug.Log("Entering Idle State");
         playerController.animator.SetFloat("speed", 0f);
+        playerController.animator.SetBool("isSprinting", false);
+
     }
 
     public override void UpdateState()
@@ -24,6 +25,8 @@ public class PlayerIdleState : PlayerState
         //always get current offset and dutch
         Vector3 currentOffset = playerController.aimCamOffset.Offset;
         float currentDutch = playerController.aimCam.Lens.Dutch;
+
+
 
         if (playerController.isAimingLeft)
         {

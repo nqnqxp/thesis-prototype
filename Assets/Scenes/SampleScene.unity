@@ -427,9 +427,15 @@ MonoBehaviour:
   right: {x: 0, y: 0, z: 0}
   tpcCam: {fileID: 925895133}
   aimCam: {fileID: 1563195859}
+  aimCamOffset: {fileID: 1563195856}
+  aimBCamOffset: {x: 0, y: 0, z: 0}
+  aimRCamOffset: {x: 0.66, y: 0, z: 0}
+  aimLCamOffset: {x: -0.66, y: 0, z: 0}
+  transitionSpeed: 10
   isAimingLeft: 0
   isAimingRight: 0
   isAimingGen: 0
+  isAimingBoth: 0
   leftFireInput: 0
   rightFireInput: 0
   animator: {fileID: 948138165}
@@ -703,7 +709,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 0.5
     CustomCurve:
       serializedVersion: 2
       m_Curve: []

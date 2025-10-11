@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -226,7 +225,8 @@ public class PlayerRunningState : PlayerState
         playerController.controller.Move(playerController.velocity * Time.deltaTime);
 
 
-        playerController.animator.SetFloat("speed", currentSpeed / targetMaxSpeed);
+        playerController.animator.SetFloat("speed", (currentSpeed/targetMaxSpeed));
+        //Debug.Log(playerController.animator.speed);
 
         playerController.jumpInput = false;
     }
@@ -235,4 +235,5 @@ public class PlayerRunningState : PlayerState
     {
         Debug.Log("Exiting Running State");
     }
+
 }

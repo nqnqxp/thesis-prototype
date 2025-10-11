@@ -1,4 +1,8 @@
+using GLTFast.Schema;
+using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 //using UnityEngine.InputSystem;
 
 public class PlayerIdleState : PlayerState
@@ -26,14 +30,26 @@ public class PlayerIdleState : PlayerState
         Vector3 currentOffset = playerController.aimCamOffset.Offset;
         float currentDutch = playerController.aimCam.Lens.Dutch;
 
-
+        //Debug.Log("Current State Hash: " + playerController.animator.GetCurrentAnimatorStateInfo(1).fullPathHash);
 
         if (playerController.isAimingLeft)
         {
             if (!playerController.isAimingRight)
             {
+
+                playerController.animator.SetBool("isDrawingLG",true);
                 playerController.aimCam.Priority = PlayerController.activePriority;
                 playerController.tpcCam.Priority = PlayerController.inactivePriority;
+
+                
+                if (playerController.animator.GetCurrentAnimatorStateInfo(1).IsName("Left.drawLgun"))
+                {
+                    Debug.Log("drawing left gun");
+                    playerController.rigLayer.gameObject.SetActive(true);
+                    playerController.LeftHandIK.gameObject.SetActive(true);
+                    playerController.LeftGun.gameObject.SetActive(true);
+                }
+                
 
                 //if offset is close to target value, just make it the target value to reduce jittering from math lerp (same for dutch below)
                 if (Mathf.Abs(currentOffset.x - playerController.aimLCamOffset.x) < 0.001f)
@@ -69,8 +85,16 @@ public class PlayerIdleState : PlayerState
         {
             if (!playerController.isAimingLeft)
             {
+                playerController.animator.SetBool("isDrawingRG", true);
                 playerController.aimCam.Priority = PlayerController.activePriority;
                 playerController.tpcCam.Priority = PlayerController.inactivePriority;
+
+                if (playerController.animator.GetCurrentAnimatorStateInfo(2).IsName("Right.drawRgun"))
+                {
+                    playerController.rigLayer.gameObject.SetActive(true);
+                    playerController.RightHandIK.gameObject.SetActive(true);
+                    playerController.RightGun.gameObject.SetActive(true);
+                }
 
                 if (Mathf.Abs(currentOffset.x - playerController.aimRCamOffset.x) < 0.001f)
                 {
@@ -103,6 +127,17 @@ public class PlayerIdleState : PlayerState
         
         if (playerController.isAimingBoth)
         {
+            
+            playerController.animator.SetBool("isDrawingLG", true);
+            playerController.animator.SetBool("isDrawingRG", true);
+            
+            playerController.rigLayer.gameObject.SetActive(true);
+            playerController.LeftHandIK.gameObject.SetActive(true);
+            playerController.LeftGun.gameObject.SetActive(true);
+            playerController.RightHandIK.gameObject.SetActive(true);
+            playerController.RightGun.gameObject.SetActive(true);
+            
+
             if (Mathf.Abs(currentOffset.x - playerController.aimBCamOffset.x) < 0.001f)
             {
                 playerController.aimCamOffset.Offset = playerController.aimBCamOffset;
@@ -131,6 +166,13 @@ public class PlayerIdleState : PlayerState
         {
             playerController.aimCam.Priority = PlayerController.inactivePriority;
             playerController.tpcCam.Priority = PlayerController.activePriority;
+            playerController.animator.SetBool("isDrawingLG", false);
+            playerController.animator.SetBool("isDrawingRG", false);
+            playerController.rigLayer.gameObject.SetActive(false);
+            playerController.LeftHandIK.gameObject.SetActive(false);
+            playerController.LeftGun.gameObject.SetActive(false);
+            playerController.RightHandIK.gameObject.SetActive(false);
+            playerController.RightGun.gameObject.SetActive(false);
         }
 
             if (playerController.moveInput.magnitude > 0.1f)
@@ -148,6 +190,8 @@ public class PlayerIdleState : PlayerState
 
         // Reset jump input after checking.
         playerController.jumpInput = false;
+
+
     }
 
     public override void ExitState()

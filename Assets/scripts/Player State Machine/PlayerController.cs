@@ -59,6 +59,14 @@ public class PlayerController : MonoBehaviour
     public bool leftFireInput;
     public bool rightFireInput;
 
+    public GameObject RightHandIK;
+    public GameObject RightGun;
+
+    public GameObject LeftHandIK;
+    public GameObject LeftGun;
+
+    public GameObject rigLayer;
+
     public Animator animator;
 
     private PlayerStateMachine stateMachine;

@@ -5,12 +5,12 @@ public class EnemyAI : MonoBehaviour
     public Combatant playerCombatant;
     public float attackDamage = 10f;
 
-    public float chaseSpeed = 5f;
+    public float chaseSpeed = 3f;
     public float attackRange = 2f;
     public float fieldOfView = 60f;
     public float sightMaxDistance = 50f;
 
-    private Transform playerCamera;
+    public Transform playerCamera;
     private Transform playerTransform;
 
     public LayerMask sightObstructionLayers;
@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
         if (playerObject != null)
         {
             playerTransform = playerObject.transform;
-            playerCamera = Camera.main.transform;
+            //playerCamera = Camera.main.transform;
         }
 
         if (playerCombatant == null && playerObject != null)

@@ -7,6 +7,7 @@ using System.Linq;
 public class FutureSightManager : MonoBehaviour
 {
     public float SimulationDuration = 2.0f;
+    public GameObject toneFilter;
 
     private List<IRevertibleState> revertibleObjects = new List<IRevertibleState>();
     private Dictionary<IRevertibleState, object> savedStates = new Dictionary<IRevertibleState, object>();
@@ -14,11 +15,6 @@ public class FutureSightManager : MonoBehaviour
     void Start()
     {
         revertibleObjects.AddRange(FindObjectsByType<Combatant>(FindObjectsSortMode.None));
-
-        if (revertibleObjects.Count == 0)
-        {
-            Debug.LogError("FUTURE SIGHT MANAGER: No 'Combatant' scripts found in the scene! The ability won't work.");
-        }
     }
 
     //change to use input system in future
@@ -32,6 +28,7 @@ public class FutureSightManager : MonoBehaviour
 
     private IEnumerator ActivateFutureSight()
     {
+        toneFilter.SetActive(true);
         Debug.Log("FUTURE SIGHT ACTIVATED: Capturing State...");
 
         CaptureAllStates();
@@ -50,6 +47,7 @@ public class FutureSightManager : MonoBehaviour
         SetAllCombatantsSimulationMode(false);
 
         Debug.Log("FUTURE SIGHT COMPLETE: Ready for real combat.");
+        toneFilter.SetActive(false);
     }
 
     private void CaptureAllStates()

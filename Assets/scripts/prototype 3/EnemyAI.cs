@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -9,6 +12,8 @@ public class EnemyAI : MonoBehaviour
     public float attackRange = 2f;
     public float fieldOfView = 60f;
     public float sightMaxDistance = 50f;
+    public float enemyCooldown = 1.5f;
+    public bool Attackable = true;
 
     public Transform playerCamera;
     private Transform playerTransform;
@@ -27,6 +32,7 @@ public class EnemyAI : MonoBehaviour
         if (playerCombatant == null && playerObject != null)
         {
             playerCombatant = playerObject.GetComponent<Combatant>();
+
         }
     }
     public void ExecuteAttack()
@@ -65,10 +71,18 @@ public class EnemyAI : MonoBehaviour
         }
 
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= attackRange && Attackable == true)
         {
             ExecuteAttack();
+            StartCoroutine(attackWCoolDown());
         }
+    }
+
+    private IEnumerator attackWCoolDown()
+    {
+        Attackable = false;
+        yield return new WaitForSeconds(enemyCooldown);
+        Attackable = true;
     }
 
 

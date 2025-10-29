@@ -3,7 +3,6 @@ using UnityEngine;
 public class Combatant : MonoBehaviour, IRevertibleState
 {
     public float Health = 100f;
-
     public bool IsSimulatingFuture { get; private set; } = false;
 
     public object CaptureState()
@@ -33,7 +32,7 @@ public class Combatant : MonoBehaviour, IRevertibleState
     {
         if (IsSimulatingFuture)
         {
-
+            
             Debug.Log($"SIMULATION: {gameObject.name} would have taken {damageAmount} damage.");
         }
         else

@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+    //temp solution for just one enemy
+    private Transform enemyTransform;
+
     void Start()
     {
 
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         aimCam.GetComponent<CinemachineCameraOffset>();
+
     }
 
     //MOVEMENT (MOVE SPRINT JUMP)
@@ -216,6 +220,19 @@ public class PlayerController : MonoBehaviour
             rightFireInput = false;
         }
     }
-    
 
+    public void Update()
+    {
+        enemyTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        float enemyDistance = Vector3.Distance(transform.position, enemyTransform.position);
+
+        if (enemyDistance <= 6f)
+        {
+            animator.SetBool("takeOut", true);
+        }
+        else
+        {
+            animator.SetBool("takeOut", false);
+        }
+    }
 }

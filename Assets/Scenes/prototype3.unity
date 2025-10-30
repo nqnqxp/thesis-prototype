@@ -356,6 +356,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 683590a1-4460-4c95-8b6f-8038bb98a7ba
     m_ActionName: 'Gameplay/AimR[/Mouse/forwardButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 38b8090b-c51b-43d2-a0cf-30b098f18cbc
+    m_ActionName: 'Gameplay/Crouch[/Keyboard/c]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -442,9 +446,9 @@ MonoBehaviour:
   leftFireInput: 0
   rightFireInput: 0
   RightHandIK: {fileID: 1705313395}
-  RightGun: {fileID: 0}
+  RightGun: {fileID: 5005888555431353113}
   LeftHandIK: {fileID: 555560906}
-  LeftGun: {fileID: 0}
+  LeftGun: {fileID: 4894569779384699272}
   rigLayer: {fileID: 711404612}
   animator: {fileID: 948138165}
 --- !u!114 &209165679
@@ -1053,7 +1057,7 @@ Transform:
   m_GameObject: {fileID: 636393239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.89645, y: 0.44, z: 7.12476}
+  m_LocalPosition: {x: -0.89645, y: 0.44, z: 31.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1642,7 +1646,7 @@ Animator:
   m_GameObject: {fileID: 919132149016753733}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: aa3f9e0f8ceca49fd966759a7c749208, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9b6e9cfbc4205f54fae950363c36665b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7e9c17a63c5f64ad29f9ff1264ba3a5c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7249,7 +7253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8208394174342499176
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "PlayerControls",
     "maps": [
         {
@@ -63,6 +64,15 @@
                     "name": "ShootR",
                     "type": "Button",
                     "id": "f45b001d-8406-4c63-8e33-9ed7041e8d31",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "38b8090b-c51b-43d2-a0cf-30b098f18cbc",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -265,6 +275,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AimR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7420df0c-e6b7-4da1-adf9-4324006f9ee7",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

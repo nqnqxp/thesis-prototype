@@ -154,6 +154,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""38b8090b-c51b-43d2-a0cf-30b098f18cbc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -354,6 +363,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""AimR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7420df0c-e6b7-4da1-adf9-4324006f9ee7"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -439,6 +459,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_AimR = m_Gameplay.FindAction("AimR", throwIfNotFound: true);
         m_Gameplay_ShootL = m_Gameplay.FindAction("ShootL", throwIfNotFound: true);
         m_Gameplay_ShootR = m_Gameplay.FindAction("ShootR", throwIfNotFound: true);
+        m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
         // CameraControls
         m_CameraControls = asset.FindActionMap("CameraControls", throwIfNotFound: true);
         m_CameraControls_MouseZoom = m_CameraControls.FindAction("MouseZoom", throwIfNotFound: true);
@@ -531,6 +552,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_AimR;
     private readonly InputAction m_Gameplay_ShootL;
     private readonly InputAction m_Gameplay_ShootR;
+    private readonly InputAction m_Gameplay_Crouch;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -570,6 +592,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/ShootR".
         /// </summary>
         public InputAction @ShootR => m_Wrapper.m_Gameplay_ShootR;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Crouch".
+        /// </summary>
+        public InputAction @Crouch => m_Wrapper.m_Gameplay_Crouch;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -617,6 +643,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ShootR.started += instance.OnShootR;
             @ShootR.performed += instance.OnShootR;
             @ShootR.canceled += instance.OnShootR;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         /// <summary>
@@ -649,6 +678,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ShootR.started -= instance.OnShootR;
             @ShootR.performed -= instance.OnShootR;
             @ShootR.canceled -= instance.OnShootR;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         /// <summary>
@@ -845,6 +877,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShootR(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCrouch(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CameraControls" which allows adding and removing callbacks.

@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public float attackDamage = 10f;
 
     public float chaseSpeed = 3f;
-    public float attackRange = 2f;
+    public float attackRange = 0.5f;
     public float fieldOfView = 60f;
     public float sightMaxDistance = 50f;
     public float enemyCooldown = 1.5f;
@@ -71,11 +71,13 @@ public class EnemyAI : MonoBehaviour
         }
 
 
-        if (distanceToPlayer <= attackRange && Attackable == true)
+        if (distanceToPlayer <= attackRange && Attackable == true && !playerCombatant.dead)
         {
             ExecuteAttack();
             StartCoroutine(attackWCoolDown());
         }
+
+        Debug.Log(distanceToPlayer);
     }
 
     private IEnumerator attackWCoolDown()

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e3127801060cd074a954345551a9dfbb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 341478
+  packageName: Female Runner Animset - Escapes
+  packageVersion: 1.0
+  assetPath: Assets/FemaleRunnerAnimset/Controllers/Base/Escapes/Slide.controller
+  uploadId: 809790

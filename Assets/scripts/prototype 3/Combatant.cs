@@ -3,6 +3,7 @@ using UnityEngine;
 public class Combatant : MonoBehaviour, IRevertibleState
 {
     public float Health = 100f;
+    public bool dead;
     public bool IsSimulatingFuture { get; private set; } = false;
 
     public object CaptureState()
@@ -50,6 +51,7 @@ public class Combatant : MonoBehaviour, IRevertibleState
 
     private void Die()
     {
+        dead = true;
         Debug.Log("dead");
     }
 }

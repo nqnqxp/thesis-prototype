@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8e0038f9361a9284a98f5cc5229171c9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 341478
+  packageName: Female Runner Animset - Escapes
+  packageVersion: 1.0
+  assetPath: Assets/FemaleRunnerAnimset/Controllers/Base/Escapes/QuickShift_8way.controller
+  uploadId: 809790
